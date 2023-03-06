@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+
+$black: #000;
+$white: white;
+
+$width: 1000px;
+$height: 180px;
+
+body{
+    display: block;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to right, green, grey);
+}
+
+.boxes{
+    position: absolute;
+    top: 20%;
+    left: 90%;
+    width: 90%;
+    max-width: 100%;
+    height: $height;
+    transform: translate(-50%, -50%);
+}
+
+.box{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background: linear-gradient(to right, red,green);
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 2px 0 5px rgba($color: #000000, $alpha: 0.4);
+    padding: 0 80px;
+    box-sizing: border-box;
+    transform-origin: center;
+    &:nth-child(1),
+    &:nth-child(2){
+        position: absolute;
+    }
+    &:nth-child(1){
+       left: 3%;
+       width: 94%;
+       transform: rotate(-4deg);
+       opacity: .25; 
+    }
+    &:nth-child(2){
+        left: 2%;
+        width: 96%;
+        transform: rotate(-4deg);
+        opacity: .5; 
+    }
+}
+
+.progress{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 25px;
+}
+
+.bar {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    background: cornsilk;
+    width: 100%;
+    height: 4px;
+    border-radius: 10px;
+    transform: translate(-50%,-50%);
+    overflow: hidden;
+
+}
+
+.bar__fill{
+    display: block;
+    background:green; 
+    height: 100%;
+    transition:width .5s ease-in-out;
+}
+.point{
+    position: relative;
+    color:white; 
+    cursor: pointer;
+}
+.point::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    transform: translate(-50%,-50%);
+    transition: .3s ease;
+}
+
+.point.point--complete,
+.point.point--active{
+    background: lawngreen;
+    color: lawngreen;  
+}
+
+.bullet{
+   position: relative;
+   z-index: inherit 1;
+   background: #fff;
+   width: 15px;
+   height: 15px;
+   border-radius: 100%;
+   transition: 3s ease;
+   .point--complete &,
+   .point--active &{
+      background: green;
+      box-shadow: 0 2px 4px rgba($color: #000000, $alpha: 0.3),
+                  0 0 0 6px #ae1c1c
+   }
+   
+   .point--active &{
+        background: green;
+        box-shadow: 0 2px 4px rgba($color: #000000, $alpha: 0.3),
+                    0 0 0 6px #ae1c1c
+    }
+}
+
+.label{
+    position: absolute;
+    top: 100%;
+    left:50%;
+    margin: 20px 0 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transform: translate(-50% 0);
+}

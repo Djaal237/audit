@@ -3,14 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
  */
-class Users
+class Users implements UserInterface
 {
     /**
      * @ORM\Id
@@ -43,28 +42,6 @@ class Users
      * @ORM\Column(type="string", length=255)
      */
     private $password;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Tache::class, mappedBy="pilote")
-     */
-    private $taches;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Affectation::class, mappedBy="utilisateur")
-     */
-    private $affectations;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Signalisation::class, mappedBy="utilisateur")
-     */
-    private $signalisations;
-
-    public function __construct()
-    {
-        $this->taches = new ArrayCollection();
-        $this->affectations = new ArrayCollection();
-        $this->signalisations = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -131,64 +108,23 @@ class Users
         return $this;
     }
 
-    /**
-     * @return Collection<int, Affectation>
-     */
-    public function getAffectations(): Collection
+    public function getUserIdentifier()
     {
-        return $this->affectations;
+        
+    }
+    
+    public function getRoles()
+    {
+        
     }
 
-    public function addAffectation(Affectation $affectation): self
+    public function getSalt()
     {
-        if (!$this->affectations->contains($affectation)) {
-            $this->affectations[] = $affectation;
-            $affectation->setUtilisateur($this);
-        }
-
-        return $this;
+        
     }
-
-    public function removeAffectation(Affectation $affectation): self
+  
+    public function eraseCredentials()
     {
-        if ($this->affectations->removeElement($affectation)) {
-            // set the owning side to null (unless already changed)
-            if ($affectation->getUtilisateur() === $this) {
-                $affectation->setUtilisateur(null);
-            }
-        }
-
-        return $this;
+        
     }
-
-    /**
-     * @return Collection<int, Signalisation>
-     */
-    public function getSignalisations(): Collection
-    {
-        return $this->signalisations;
-    }
-
-    public function addSignalisation(Signalisation $signalisation): self
-    {
-        if (!$this->signalisations->contains($signalisation)) {
-            $this->signalisations[] = $signalisation;
-            $signalisation->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSignalisation(Signalisation $signalisation): self
-    {
-        if ($this->signalisations->removeElement($signalisation)) {
-            // set the owning side to null (unless already changed)
-            if ($signalisation->getUtilisateur() === $this) {
-                $signalisation->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

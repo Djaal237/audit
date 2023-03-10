@@ -18,20 +18,6 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light justify-content-between">
-        <a href="{{ path("home") }}" class="navbar-brand">Acceuil</a>
-        <a href="{{ path("auteurs_list") }}" class="nav-item">Auteurs</a>
-        <a href="{{ path("livres_list") }}" class="nav-item">Livres</a>
-        {% if app.request.get("_route") == "home" %}
-        {{ form_start(form) }}
-            <div class="form-inline">
-                {{ form_row(form.auteur,{'attr':{'class':'form-control mr-sm-2', 'placeholder':'Inserez le no; d\'un auteur'}}) }}
-                <button class="btn btn-sm btn-outline-info my-2 my-sm-0" type="submit" name="search_author">Recherche</button>
-            </div>
-        {{ form_end(form) }}
-        {% endif %}
-        
-        </nav>
         {% block body %}{% endblock %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="/assets/js/jquery.min.js"></script>

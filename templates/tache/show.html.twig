@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tache{% endblock %}
+
+{% block body %}
+    <h1>Tache</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tache.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ tache.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ tache.type }}</td>
+            </tr>
+            <tr>
+                <th>Echeance1</th>
+                <td>{{ tache.echeance1 ? tache.echeance1|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Echeance2</th>
+                <td>{{ tache.echeance2 ? tache.echeance2|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateRealisation</th>
+                <td>{{ tache.dateRealisation ? tache.dateRealisation|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Solde</th>
+                <td>{{ tache.solde ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Efficace</th>
+                <td>{{ tache.efficace ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ tache.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tache_index') }}">back to list</a>
+
+    <a href="{{ path('app_tache_edit', {'id': tache.id}) }}">edit</a>
+
+    {{ include('tache/_delete_form.html.twig') }}
+{% endblock %}

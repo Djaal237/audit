@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Incidents[]    findAll()
  * @method Incidents[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class IncidentsRepository extends ServiceEntityRepository
+class IncidentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -35,7 +35,7 @@ class Incident
     private $dateHeureDocument;
 
     /**
-     * @ORM\OneToMany(targetEntity=Tache::class, mappedBy="source")
+     * @ORM\OneToMany(targetEntity=Tache::class, mappedBy="incident")
      */
     private $tache;
 
@@ -108,7 +108,7 @@ class Incident
     {
         if (!$this->tache->contains($tache)) {
             $this->tache[] = $tache;
-            $tache->setSource($this);
+            $tache->setIncident($this);
         }
 
         return $this;
@@ -118,8 +118,8 @@ class Incident
     {
         if ($this->tache->removeElement($tache)) {
             // set the owning side to null (unless already changed)
-            if ($tache->getSource() === $this) {
-                $tache->setSource(null);
+            if ($tache->getIncident() === $this) {
+                $tache->setIncident(null);
             }
         }
 

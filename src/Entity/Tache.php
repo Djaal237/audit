@@ -62,12 +62,17 @@ class Tache
     /**
      * @ORM\ManyToOne(targetEntity=Incident::class, inversedBy="tache")
      */
-    private $source;
+    private $incident;
 
     /**
      * @ORM\OneToMany(targetEntity=Affectation::class, mappedBy="tache")
      */
     private $affectations;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $source;
 
     public function __construct()
     {
@@ -176,14 +181,14 @@ class Tache
         return $this;
     }
 
-    public function getSource(): ?Incident
+    public function getIncident(): ?Incident
     {
-        return $this->source;
+        return $this->incident;
     }
 
-    public function setSource(?Incident $source): self
+    public function setIncident(?Incident $incident): self
     {
-        $this->source = $source;
+        $this->incident = $incident;
 
         return $this;
     }
@@ -214,6 +219,18 @@ class Tache
                 $affectation->setTache(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(string $source): self
+    {
+        $this->source = $source;
 
         return $this;
     }
